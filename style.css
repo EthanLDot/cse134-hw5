@@ -1,0 +1,39 @@
+#rating-form {
+    float: left;
+}
+
+#rating-form button, #rating-form output{
+    display: block;
+}
+
+#rating-form > #stars {
+    border: 1px black solid;
+    height: 75px;
+    width: 150px;
+}
+
+#rating-form:not(:checked) > #stars > input {
+    display: none;
+}
+
+#rating-form:not(:checked) > #stars > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: gray;
+}
+#rating-form:not(:checked) > #stars > label::before {
+    content: '★';
+}
+
+#rating-form > #stars > input:checked ~ label {
+    color: rgb(237, 225, 0);   
+}
+
+#rating-form:not(:checked) > #stars > label:hover,
+#rating-form:not(:checked) > #stars > label:hover ~ label {
+    color: #ac8700;  
+}
