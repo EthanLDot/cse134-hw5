@@ -5,21 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSE 134 HW 5</title>
     <script src="./ratingwidget.js" type="module"></script>
+    <script src="./weatherwidget.js" type="module"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Rating Widget</h2>
-    <noscript>
-        <style>
-            rating-widget{display: none;}
-        </style>
-        <form action="https://httpbin.org/post" method="POST">
-            <label for="rating">How satisfied are you?</label>
-            <input type="hidden" name="question" value="How satisfied are you?">
-            <input type="hidden" name="sentBy" value="HTML">
-            <input type="number" id="rating" name="rating" min="1" max="5" value="0" required>
-            <button type="submit">Submit</button>
-        </form>
-    </noscript>
-    <rating-widget></rating-widget>
+    <section id="rating">
+        <h2>Rating Widget</h2>
+        <noscript>
+            <style>
+                rating-widget{display: none;}
+            </style>
+            <form action="https://httpbin.org/post" method="POST">
+                <label for="rating">How satisfied are you?</label>
+                <input type="hidden" name="question" value="How satisfied are you?">
+                <input type="hidden" name="sentBy" value="HTML">
+                <input type="number" id="rating" name="rating" min="1" max="5" value="0" required>
+                <button type="submit">Submit</button>
+            </form>
+        </noscript>
+        <rating-widget numstars = "3" color="green"></rating-widget>
+    </section>
+    
+    <section id="forecast">
+        <h2>Current Weather</h2>
+        <noscript>
+            <style>
+                weather-widget{display: none;}
+            </style>
+            <h3>
+                Oops! <br> Current Weather Conditions Unavailable
+            </h3>
+        </noscript>
+        <weather-widget></weather-widget>
+    </section>
+
 </body>
 </html>
