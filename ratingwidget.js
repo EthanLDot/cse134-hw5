@@ -11,6 +11,8 @@ class RatingWidget extends HTMLElement {
         <style>
             #rating-form {
                 float: left;
+                display: flex;
+                flex-direction: column;
             }
             
             #rating-form button, #rating-form output{
@@ -18,9 +20,12 @@ class RatingWidget extends HTMLElement {
             }
             
             #rating-form > #stars {
-                border: 1px black solid;
-                height: 75px;
-                width: 300px;
+                background-color: silver;
+                height: 50px;
+                padding: 5px;
+                width: fit-content;
+                border-radius: 15px;
+                margin: 10px 0px;
             }
             
             #rating-form:not(:checked) > #stars > input {
@@ -38,6 +43,7 @@ class RatingWidget extends HTMLElement {
             }
             #rating-form:not(:checked) > #stars > label::before {
                 content: '★';
+                height: 50px;
             }
             
             #rating-form > #stars > input:checked ~ label {
@@ -47,6 +53,17 @@ class RatingWidget extends HTMLElement {
             #rating-form:not(:checked) > #stars > label:hover,
             #rating-form:not(:checked) > #stars > label:hover ~ label {
                 color: var(--star-color, #ac8700);  
+            }
+
+            button{
+                width: fit-content;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            button:hover{
+                background-color: green;
+                color: white;
             }
         </style>
         <form id="rating-form" action="https://httpbin.org/post" method="POST">
@@ -137,7 +154,6 @@ class RatingWidget extends HTMLElement {
 
     
     submitForm() {
-        console.log(this.shadowRoot.getElementById('rating-form').getElementsByTagName('output')[0]);
         var form = this.shadowRoot.getElementById("rating-form");
             
         var formData = new FormData(form);
@@ -149,7 +165,6 @@ class RatingWidget extends HTMLElement {
             const rating = (parseInt(JSON.parse(xhr.responseText).form.rating));
             const output = form.getElementsByTagName("output")[0];
             const threshold = form.querySelectorAll("#stars label").length * (4/5);
-            console.log(threshold);
             if(rating >= threshold){
                 output.innerText = `Thanks for the ${rating}!`;
             }
