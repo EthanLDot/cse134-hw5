@@ -88,6 +88,7 @@ class WeatherWidget extends HTMLElement {
             })
             .then(data => {
                 // Handle the data from the response
+                console.log(data);
                 const forecast = data.properties.periods[0];
                 const name = forecast.name;
                 let nightMode = false;
