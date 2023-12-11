@@ -11,10 +11,7 @@
 <body>
     <section id="rating">
         <h2>Rating Widget</h2>
-        <noscript>
-            <style>
-                rating-widget{display: none;}
-            </style>
+        <rating-widget color="yellow">
             <form action="https://httpbin.org/post" method="POST">
                 <label for="rating">How satisfied are you?</label>
                 <input type="hidden" name="question" value="How satisfied are you?">
@@ -22,8 +19,7 @@
                 <input type="number" id="rating" name="rating" min="1" max="5" value="0" required>
                 <button type="submit">Submit</button>
             </form>
-        </noscript>
-        <rating-widget numstars = "5" color="yellow"></rating-widget>
+        </rating-widget>
     </section>
     
     <section id="forecast">

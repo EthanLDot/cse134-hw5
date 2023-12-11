@@ -7,6 +7,7 @@ class RatingWidget extends HTMLElement {
     }
 
     render() {
+        const starCount = (document.querySelector('rating-widget input#rating').max);
         this.shadowRoot.innerHTML = `
         <style>
             #rating-form {
@@ -76,6 +77,29 @@ class RatingWidget extends HTMLElement {
             <output></output>
         </form>
         `;
+        const stars = this.shadowRoot.querySelector('#stars');
+        let value = starCount;
+        if(starCount < 3) {
+            value = 3;
+        }
+        else if(starCount > 10){
+            value = 10;
+        }
+        for (let counter = value; counter > 0; counter--) {
+            // Creating input element
+            const inputElement = document.createElement('input');
+            inputElement.type = 'radio';
+            inputElement.id = 'star' + String(counter);
+            inputElement.name = 'rating';
+            inputElement.value = String(counter);
+            inputElement.required = true;
+
+            const labelElement = document.createElement('label');
+            labelElement.htmlFor = 'star' + String(counter);
+        
+            stars.appendChild(inputElement);
+            stars.appendChild(labelElement);
+        }
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -123,33 +147,6 @@ class RatingWidget extends HTMLElement {
             this.style.setProperty('--star-color', hexColor);
             // this.style.setProperty('')
         }
-        else if(name === 'numstars') {
-            customElements.whenDefined('rating-widget').then(() => {
-                const stars = this.shadowRoot.querySelector('#stars');
-                let value = newValue;
-                if(newValue < 3) {
-                    value = 3;
-                }
-                else if(newValue > 10){
-                    value = 10;
-                }
-                for (let counter = value; counter > 0; counter--) {
-                    // Creating input element
-                    const inputElement = document.createElement('input');
-                    inputElement.type = 'radio';
-                    inputElement.id = 'star' + String(counter);
-                    inputElement.name = 'rating';
-                    inputElement.value = String(counter);
-                    inputElement.required = true;
-
-                    const labelElement = document.createElement('label');
-                    labelElement.htmlFor = 'star' + String(counter);
-                
-                    stars.appendChild(inputElement);
-                    stars.appendChild(labelElement);
-                }
-            } );
-        }
     }
 
     
@@ -168,7 +165,7 @@ class RatingWidget extends HTMLElement {
             if(rating >= threshold){
                 output.innerText = `Thanks for the ${rating}!`;
             }
-            else
+            else if(!isNaN(rating))
             {
                 output.innerText = `Thanks for your feedback of ${rating} stars. We'll try to do better!`;
             }
